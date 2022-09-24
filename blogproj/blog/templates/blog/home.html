@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <!-- <h1>Blog Home</h1>
+    <hr>
+
+    {% for posts in posts %}
+        <h3>{{ posts.title }}</h3>
+        <p>By: {{ posts.author }} on {{ posts.date_posted }}</p>
+        <p>{{ posts.content }}</p>
+        <br>
+    {% endfor %}  -->
+    {% if request.user.is_authenticated %}
+        <p>{{ request.user }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    <hr>
+
+    <h1>Blogs</h1>
+
+    <table>
+        <tr>
+            <th>Posts</th>
+        </tr>
+        
+        {% for posts in post %}
+        <tr>
+            <td>{{ posts.title }}</td> 
+            <td><a href="{% url 'posts-detail' posts.id %}">View It</a></td> 
+        {% empty %}
+        <h3>No posts in list</h3>
+        <a href="{% url 'post-create' %}">Add New Post</a>
+        {% endfor %}
+    </table><hr>
+    <a href="{% url 'post-create' %}">Add</a> <hr>
+    <a href="{% url 'posts' %}">My posts</a> <hr>
+    
+{% endblock content %}

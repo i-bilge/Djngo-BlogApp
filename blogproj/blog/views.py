@@ -45,9 +45,15 @@ def about(request):
     return render(request, 'blog/about.html', {'title':"About Page"})
 
 # -------------------------------------------------
+class HomePage(ListView):
+    model = Post
+    context_object_name = 'post'
+    template_name = 'blog/home.html'
+
 class PostList(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'post'
+    template_name = 'blog/post_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

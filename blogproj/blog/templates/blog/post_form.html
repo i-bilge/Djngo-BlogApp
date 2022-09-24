@@ -1,0 +1,7 @@
+<h1>Post Form</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Post It">
+</form>
+<a href="{% url 'post' %}">Go Back</a>

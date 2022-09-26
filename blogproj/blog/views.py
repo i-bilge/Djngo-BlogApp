@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 
 from .models import Post
 from django.urls import reverse_lazy
@@ -91,8 +92,9 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('post')
 
-class RegisterPage(FormView):
+class RegisterPage(CreateView):
     template_name = 'blog/register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('post')
+    model = User
